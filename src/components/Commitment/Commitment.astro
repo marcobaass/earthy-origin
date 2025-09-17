@@ -1,0 +1,144 @@
+---
+import bgLight from './../../assets/images/kraft-paper-02.webp'
+import { getImage } from 'astro:assets'
+
+import CoffeeMachineRaw from '../../assets/svgs/coffeeMachine.svg?raw'
+import HarvestedBeansRaw from '../../assets/svgs/harvestedBeans.svg?raw'
+import ShippingRaw from '../../assets/svgs/shipping.svg?raw'
+
+const mobileImage = await getImage({ src: bgLight, width: 720, format: 'webp', quality: 80 });
+const tabletImage = await getImage({ src: bgLight, width: 1200, format: 'webp', quality: 80 });
+const desktopImage = await getImage({ src: bgLight, width: 1920, format: 'webp', quality: 80 });
+const largeImage = await getImage({ src: bgLight, width: 2560, format: 'webp', quality: 80 });
+---
+<div class="wrapper-commitment" id="commitment">
+  <h3 class="headline">Our Commitment to Exceptional Coffee</h3>
+  <p class="content">At Earthy Origin, every cup tells a tale of tradition, sustainability, and unparalleled flavor. We meticulously source our beans from the world's most pristine coffee regions, ensuring a rich journey from farm to your cup.</p>
+  <div class="coffee-icons">
+    <div class="icon" set:html={HarvestedBeansRaw} />
+    <div class="icon" set:html={ShippingRaw} />
+    <div class="icon" set:html={CoffeeMachineRaw} />
+  </div>
+</div>
+
+<style define:vars={{
+  mobileUrl: `url(${mobileImage.src})`,
+  tabletUrl: `url(${tabletImage.src})`,
+  desktopUrl: `url(${desktopImage.src})`,
+  largeUrl: `url(${largeImage.src})`
+}}>
+
+.wrapper-commitment {
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  background-color: black;
+  background-image: var(--mobileUrl);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  height: 100dvh;
+  scroll-snap-align: start;
+  padding: var(--gap-m);
+}
+
+.headline{
+  max-width: 30ch;
+  text-align: center;
+  margin-bottom: var(--gap-m);
+  color: black;
+}
+
+.content {
+  max-width: 45ch;
+  margin-bottom: var(--gap-2xl);
+  color: black;
+}
+
+.coffee-icons {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-2xl);
+}
+
+.icon svg {
+  height: 75px;
+  width: auto;
+}
+
+.icon svg path {
+  fill: transparent;
+  stroke: black;
+  stroke-width: 1;
+  opacity: 0;
+}
+
+@media (min-width: 721px) {
+  .wrapper-commitment {
+    background-image: var(--tabletUrl);
+  }
+}
+
+@media (min-width: 1201px) {
+  .wrapper-commitment {
+    background-image: var(--desktopUrl);
+  }
+}
+
+@media (min-width: 1921px) {
+  .wrapper-commitment {
+    background-image: var(--largeUrl);
+  }
+}
+</style>
+
+<script>
+  import gsap from "gsap";
+  import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(DrawSVGPlugin, ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+    const allPaths = document.querySelectorAll('.coffee-icons .icon svg path');
+    const triggerElement = document.querySelector('.wrapper-commitment');
+
+    if (allPaths.length === 0) {
+      console.log('No SVG paths found. Check if SVGs are rendering properly.');
+      return;
+    }
+
+    gsap.set(allPaths, {
+      drawSVG: "0%",
+      fill: "transparent",
+      stroke: "black",
+      strokeWidth: 2
+    });
+
+    // Step 1: Initialize the timeline and ScrollTrigger
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: triggerElement,
+          start: "top center",
+          toggleActions: "play reset play reset"
+        }
+      });
+
+      // Step 2: Animate the drawing and opacity simultaneously for a set duration
+
+      console.log(allPaths);
+
+
+      tl.to(allPaths, {
+        drawSVG: "100%",
+        opacity: 1,
+        duration: 2.5,
+        ease: "power2.out",
+      });
+  });
+
+
+</script>

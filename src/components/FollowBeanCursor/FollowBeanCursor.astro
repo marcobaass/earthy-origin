@@ -1,0 +1,99 @@
+---
+import FollowBean from "../../assets/svgs/followBean.svg";
+---
+
+<div id="cursorFollower">
+  <FollowBean />
+</div>
+
+<style>
+  #cursorFollower {
+    background-size: cover;
+    position: fixed;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    /* border-radius: 50%; */
+    /* border: 3px solid var(--clr-two); */
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    #cursorFollower {
+      display: none;
+    }
+  }
+
+
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  if (matchMedia("(min-width: 769px").matches) {
+
+    let mouseX: number = 0
+    let mouseY: number = 0
+    let followerX: number = 0
+    let followerY: number = 0
+    let hasMouseMoved = false
+    const follower = document.getElementById('cursorFollower')
+
+    const cursorOffset = 40;
+    const easingFactor = 0.1;
+
+    if (follower) {
+      gsap.set(follower, {
+        xPercent: -50,
+        yPercent: -50,
+        autoAlpha: 0
+      });
+    }
+
+    function animateFollower() {
+      if(!follower) return
+
+      const dx = mouseX - followerX;
+      const dy = mouseY - followerY;
+
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance > cursorOffset) {
+        const targetX = mouseX - (dx / distance) * cursorOffset;
+        const targetY = mouseY - (dy / distance) * cursorOffset;
+
+        followerX = followerX + (targetX - followerX) * easingFactor;
+        followerY = followerY + (targetY - followerY) * easingFactor;
+      } else {
+        followerX = mouseX - dx;
+        followerY = mouseY - dy;
+      }
+
+      gsap.set(follower, {
+        x: followerX,
+        y: followerY
+      })
+      requestAnimationFrame(animateFollower)
+    }
+
+    document.addEventListener('mousemove', (e) =>{
+      mouseX = e.clientX
+      mouseY = e.clientY
+
+      if(!hasMouseMoved) {
+        hasMouseMoved = true
+        followerX = mouseX
+        followerY = mouseY
+        gsap.to(follower, {
+          autoAlpha: 1,
+          duration: 2
+        })
+        animateFollower()
+      }
+    })
+  }
+
+</script>

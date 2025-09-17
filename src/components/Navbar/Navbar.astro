@@ -1,0 +1,357 @@
+---
+import Hover from '../../assets/svgs/hoverUnderline.svg'
+---
+<nav class="navbar">
+    <a href="/" class="navbar-brand">Earthy Origin</a>
+    <ul class="navbar-nav">
+        <li>
+          <a href="#commitment" class="nav-link-with-hover">
+            Why Us
+            <Hover class="underline-svg"/>
+          </a>
+        </li>
+        <li>
+          <a href="#our-journey" class="nav-link-with-hover">
+            Our Journey
+            <Hover class="underline-svg"/>
+          </a>
+        </li>
+        <li>
+          <a href="#testimonials" class="nav-link-with-hover">
+            Testimonials
+            <Hover class="underline-svg"/>
+          </a>
+        </li>
+        <li>
+          <a href="#contact" class="nav-link-with-hover">
+            Contact
+            <Hover class="underline-svg"/>
+          </a>
+        </li>
+    </ul>
+
+    {/* Mobile Menue */}
+    <button class="hamburger" aria-label="Toggle menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+
+    <div class="mobile-menu">
+      <div class="mobile-menu-content">
+        <a href="#why-us" class="mobile-nav-link">Why Us</a>
+        <a href="#our-journey" class="mobile-nav-link">Our Journey</a>
+        <a href="#testimonials" class="mobile-nav-link">Testimonials</a>
+        <a href="#contact" class="mobile-nav-link">Contact</a>
+      </div>
+    </div>
+</nav>
+
+<style>
+  /* CSS for Navbar */
+  .navbar {
+      background-color: rgba(60, 46, 28, 0.5);
+      height: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 var(--gap-xl);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+  }
+
+  .navbar-brand {
+      color: #F5F5DC;
+      font-family: "Kaushan Script", cursive;
+      font-size: var(--font-4);
+      text-decoration: none;
+      line-height: 0;
+      padding-left: 0.5rem;
+  }
+
+  .navbar-nav {
+      font-family: 'Kulim Park';
+      font-size: var(--font-1);
+      font-weight: 200;
+      letter-spacing: 0.1em;
+      word-spacing: -0.3em;
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      line-height: 0;
+  }
+
+  .navbar-nav li a {
+      color: #F5F5DC;
+      text-decoration: none;
+      font-family: 'Kulim Park';
+      font-size: var(--font-1);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      line-height: 0;
+      transition: color 0.3s ease;
+      position: relative;
+  }
+
+  .underline-svg {
+    opacity: 0;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .underline-svg svg path {
+      fill: none;
+      stroke: var(--clr-dark-brown);
+      stroke-width: 2px;
+  }
+
+  .navbar-nav li a:hover {
+      color: var(--clr-dark-brown);
+  }
+
+  .nav-button {
+      background-color: #8B4513;
+      color: #F5F5DC !important;
+      padding: 8px 15px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 1em;
+      transition: background-color 0.75s ease;
+  }
+
+  .nav-button:hover {
+      background-color: #A0522D;
+  }
+
+  /* Hamburger Menu Styles */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+    color: #F5F5DC;
+    margin-right: 1rem;
+  }
+
+  .hamburger-line {
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  .hamburger.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+
+  /* Mobile Menu Styles */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    background-color: rgba(60, 46, 28, 0.95);
+    backdrop-filter: blur(10px);
+    transition: right 0.3s ease;
+    z-index: 999;
+    padding-top: 100px;
+  }
+
+  .mobile-menu.active {
+    right: 0;
+  }
+
+  .mobile-menu-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    align-items: flex-start;
+  }
+
+  .mobile-nav-link {
+    color: #F5F5DC;
+    text-decoration: none;
+    font-family: 'Kulim Park';
+    font-size: var(--font-2);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    padding: 0.8rem 1rem;
+    width: 100%;
+    text-align: left;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+  }
+
+  .mobile-nav-link:hover {
+    background-color: rgba(139, 69, 19, 0.3);
+    border-left-color: var(--clr-dark-brown);
+    transform: translateX(5px);
+  }
+
+  /* Media Queries */
+  @media (max-width: 1024px) {
+    .hamburger {
+      display: flex;
+    }
+
+    .navbar-nav {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 0 var(--gap-md);
+    }
+
+    .mobile-menu {
+      width: 280px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .mobile-menu {
+      width: 100%;
+    }
+
+    .navbar-brand {
+      font-size: calc(var(--font-4) * 0.8);
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+  console.log(DrawSVGPlugin);
+
+
+  gsap.registerPlugin(DrawSVGPlugin);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Desktop navigation hover effects
+    const navLinks = document.querySelectorAll('.nav-link-with-hover');
+    const root = document.documentElement;
+    const darkBrownColor = getComputedStyle(root).getPropertyValue('--clr-dark-brown')
+
+
+    navLinks.forEach(link => {
+      const underLinePath = link.querySelector('.underline-svg #underline');
+      const underlineSVGContainer = link.querySelector('.underline-svg');
+
+      if (underLinePath) {
+        gsap.set(underLinePath, {
+          drawSVG: "0%"
+        });
+
+        const hoverTimeline = gsap.timeline({
+          paused: true,
+          reverseEase: "power2.in",
+          reverseDuration: 0.2
+        });
+
+        hoverTimeline.to(underLinePath, {
+          opacity: 1,
+          duration: 0.75,
+          drawSVG: "100%",
+          stroke: darkBrownColor,
+          ease: "power2.out",
+        })
+        .to(underLinePath, {
+          duration: 0.1,
+          fill: darkBrownColor,
+          ease: "none"
+        }, ">-0.2")
+
+        link.addEventListener('mouseenter', () => {
+          gsap.set(underlineSVGContainer, { opacity: 1 });
+          hoverTimeline.play()
+        })
+        link.addEventListener('mouseleave', () => {
+          hoverTimeline.timeScale(2).reverse()
+        });
+      }
+    });
+
+    // Mobile hamburger menu functionality
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    if (hamburger && mobileMenu) {
+      // Toggle menu on hamburger click
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+
+        // Prevent body scroll when menu is open
+        if (mobileMenu.classList.contains('active')) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
+      });
+
+      // Close menu when clicking on overlay
+      mobileMenu.addEventListener('click', (e) => {
+        if (e.target === mobileMenu) {
+          closeMenu();
+        }
+      });
+
+      // Close menu when clicking on mobile nav links
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          closeMenu();
+        });
+      });
+
+      // Close menu on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+          closeMenu();
+        }
+      });
+
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 1024) {
+          closeMenu();
+        }
+      });
+
+      function closeMenu() {
+        hamburger?.classList.remove('active');
+        mobileMenu?.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+  });
+
+</script>

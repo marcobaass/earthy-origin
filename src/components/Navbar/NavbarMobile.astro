@@ -1,0 +1,178 @@
+---
+import Hover from '../../assets/svgs/hoverUnderline.svg'
+---
+<nav class="navbar">
+    <a href="/" class="navbar-brand">Earthy Origin</a>
+    <ul class="navbar-nav">
+        <li>
+          <a href="#why-us" class="nav-link-with-hover">
+            Why Us
+            <Hover class="underline-svg"/>
+          </a>
+        </li>
+        <li>
+          <a href="#our-journey" class="nav-link-with-hover">
+            Our Journey
+            <Hover class="underline-svg"/>
+          </a>
+        </li>
+        <li>
+          <a href="#testimonials" class="nav-link-with-hover">
+            Testimonials
+            <Hover class="underline-svg"/>
+          </a>
+        </li>
+        <li>
+          <a href="#contact" class="nav-link-with-hover">
+            Contact
+            <Hover class="underline-svg"/>
+          </a>
+        </li>
+    </ul>
+    {/* Hier käme dein Hamburger-Icon für die mobile Ansicht und das ausgeklappte Menü */}
+</nav>
+
+<style>
+    /* Das spezifische CSS für deine Navbar hier */
+    .navbar {
+        background-color: rgba(60, 46, 28, 0.5);
+        height: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 var(--gap-xl);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .navbar-brand {
+        color: #F5F5DC;
+        font-family: "Kaushan Script", cursive;
+        font-size: var(--font-4);
+        text-decoration: none;
+        line-height: 0;
+    }
+
+    .navbar-nav {
+        font-family: 'Kulim Park';
+        font-size: var(--font-1);
+        font-weight: 200;
+        letter-spacing: 0.1em;
+        word-spacing: -0.3em;
+        list-style: none;
+        display: flex;
+        gap: 30px;
+        line-height: 0;
+    }
+
+    .navbar-nav li a {
+        color: #F5F5DC;
+        text-decoration: none;
+        font-family: 'Kulim Park';
+        font-size: var(--font-1);
+        font-weight: 300;
+        letter-spacing: 0.1em;
+        line-height: 0;
+        transition: color 0.3s ease;
+        position: relative;
+    }
+
+    .underline-svg {
+      opacity: 0;
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .underline-svg svg path {
+        fill: none;
+        stroke: var(--clr-dark-brown);
+        stroke-width: 2px;
+    }
+
+    .navbar-nav li a:hover {
+        color: var(--clr-dark-brown);
+    }
+
+    .nav-button {
+        background-color: #8B4513;
+        color: #F5F5DC !important;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 1em;
+        transition: background-color 0.75s ease;
+    }
+
+    .nav-button:hover {
+        background-color: #A0522D;
+    }
+
+    /* Media Queries für die mobile Navbar (Hamburger-Menü) würden auch hierher gehören */
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+  console.log(DrawSVGPlugin);
+
+
+  gsap.registerPlugin(DrawSVGPlugin);
+  console.log(DrawSVGPlugin);
+
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('.nav-link-with-hover');
+    const root = document.documentElement;
+    const darkBrownColor = getComputedStyle(root).getPropertyValue('--clr-dark-brown')
+
+
+    navLinks.forEach(link => {
+      const underLinePath = link.querySelector('.underline-svg #underline');
+      const underlineSVGContainer = link.querySelector('.underline-svg');
+
+      if (underLinePath) {
+        gsap.set(underLinePath, {
+          drawSVG: "0%"
+        });
+
+        const hoverTimeline = gsap.timeline({
+          paused: true,
+          reverseEase: "power2.in",
+          reverseDuration: 0.2
+        });
+
+        hoverTimeline.to(underLinePath, {
+          opacity: 1,
+          duration: 0.75,
+          drawSVG: "100%",
+          stroke: darkBrownColor,
+          ease: "power2.out",
+        })
+        .to(underLinePath, {
+          duration: 0.1,
+          fill: darkBrownColor,
+          ease: "none"
+        }, ">-0.2")
+
+        link.addEventListener('mouseenter', () => {
+          gsap.set(underlineSVGContainer, { opacity: 1 });
+          hoverTimeline.play()
+        })
+        link.addEventListener('mouseleave', () => {
+          hoverTimeline.timeScale(2).reverse()
+        })
+      }
+    })
+
+  })
+
+</script>

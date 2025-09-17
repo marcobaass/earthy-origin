@@ -1,0 +1,51 @@
+---
+import bgLight from './../../assets/images/kraft-paper-01.webp'
+import { getImage } from 'astro:assets'
+
+const mobileImage = await getImage({ src: bgLight, width: 720, format: 'webp', quality: 80 });
+const tabletImage = await getImage({ src: bgLight, width: 1200, format: 'webp', quality: 80 });
+const desktopImage = await getImage({ src: bgLight, width: 1920, format: 'webp', quality: 80 });
+const largeImage = await getImage({ src: bgLight, width: 2560, format: 'webp', quality: 80 });
+---
+<div class="wrapper-commitment">
+  <h1>Hello</h1>
+</div>
+
+<style define:vars={{
+  mobileUrl: `url(${mobileImage.src})`,
+  tabletUrl: `url(${tabletImage.src})`,
+  desktopUrl: `url(${desktopImage.src})`,
+  largeUrl: `url(${largeImage.src})`
+}}>
+
+.wrapper-commitment {
+  background-color: black;
+  background-image: var(--mobileUrl);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  height: 100dvh;
+  scroll-snap-align: start;
+}
+
+
+
+@media (min-width: 721px) {
+  .wrapper-commitment {
+    background-image: var(--tabletUrl);
+  }
+}
+
+@media (min-width: 1201px) {
+  .wrapper-commitment {
+    background-image: var(--desktopUrl);
+  }
+}
+
+@media (min-width: 1921px) {
+  .wrapper-commitment {
+    background-image: var(--largeUrl);
+  }
+}
+</style>

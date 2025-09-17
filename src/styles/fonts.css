@@ -1,0 +1,144 @@
+/* ==================================== */
+/* Kaushan Script */
+/* ==================================== */
+@font-face {
+    font-family: 'Kaushan Script';
+
+    src: url('/fonts/Kaushan_Script/kaushanscript-regular-webfont.woff2') format('woff2'),
+         url('/fonts/Kaushan_Script/kaushanscript-regular-webfont.woff') format('woff');
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-display: swap; /* Wichtig für schnelles Laden und FOUC vermeiden */
+}
+
+
+/* ==================================== */
+/* Kulim Park */
+/* ==================================== */
+
+/* Kulim Park Bold (700) - Dateiname: kulimpark-bold-webfont */
+@font-face {
+    font-family: 'Kulim Park';
+    src: url('/fonts/Kulim_Park/kulimpark-bold-webfont.woff2') format('woff2'),
+         url('/fonts/Kulim_Park/kulimpark-bold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Kulim Park BoldItalic (700 italic) - Dateiname: kulimpark-bolditalic-webfont */
+@font-face {
+    font-family: 'Kulim Park';
+    src: url('/fonts/Kulim_Park/kulimpark-bolditalic-webfont.woff2') format('woff2'),
+         url('/fonts/Kulim_Park/kulimpark-bolditalic-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Kulim Park ExtraLight (200) - Dateiname: kulimpark-extralight-webfont */
+@font-face {
+    font-family: 'Kulim Park';
+    src: url('/fonts/Kulim_Park/kulimpark-extralight-webfont.woff2') format('woff2'),
+         url('/fonts/Kulim_Park/kulimpark-extralight-webfont.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Kulim Park ExtraLightItalic (200 italic) - Dateiname: kulimpark-extralightitalic-webfont */
+@font-face {
+    font-family: 'Kulim Park';
+    src: url('/fonts/Kulim_Park/kulimpark-extralightitalic-webfont.woff2') format('woff2'),
+         url('/fonts/Kulim_Park/kulimpark-extralightitalic-webfont.woff') format('woff');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Kulim Park Italic (400 italic) - Dateiname: kulimpark-italic-webfont */
+@font-face {
+    font-family: 'Kulim Park';
+    src: url('/fonts/Kulim_Park/kulimpark-italic-webfont.woff2') format('woff2'),
+         url('/fonts/Kulim_Park/kulimpark-italic-webfont.woff') format('woff');
+    font-weight: 400; /* Regular Italic */
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Kulim Park Light (300) - Dateiname: kulimpark-light-webfont */
+@font-face {
+    font-family: 'Kulim Park';
+    src: url('/fonts/Kulim_Park/kulimpark-light-webfont.woff2') format('woff2'),
+         url('/fonts/Kulim_Park/kulimpark-light-webfont.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Kulim Park LightItalic (300 italic) - Dateiname: kulimpark-lightitalic-webfont */
+@font-face {
+    font-family: 'Kulim Park';
+    src: url('/fonts/Kulim_Park/kulimpark-lightitalic-webfont.woff2') format('woff2'),
+         url('/fonts/Kulim_Park/kulimpark-lightitalic-webfont.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Kulim Park Regular (400) - Dateiname: kulimpark-regular-webfont */
+@font-face {
+    font-family: 'Kulim Park';
+    src: url('/fonts/Kulim_Park/kulimpark-regular-webfont.woff2') format('woff2'),
+         url('/fonts/Kulim_Park/kulimpark-regular-webfont.woff') format('woff');
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Kulim Park SemiBold (600) - Dateiname: kulimpark-semibold-webfont */
+@font-face {
+    font-family: 'Kulim Park';
+    src: url('/fonts/Kulim_Park/kulimpark-semibold-webfont.woff2') format('woff2'),
+         url('/fonts/Kulim_Park/kulimpark-semibold-webfont.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Kulim Park SemiBoldItalic (600 italic) - Dateiname: kulimpark-semibolditalic-webfont */
+@font-face {
+    font-family: 'Kulim Park';
+    src: url('/fonts/Kulim_Park/kulimpark-semibolditalic-webfont.woff2') format('woff2'),
+         url('/fonts/Kulim_Park/kulimpark-semibolditalic-webfont.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+h1 {
+  font-family: 'Kaushan Script';
+  font-size: var(--font-8);
+  line-height: 1.0;
+}
+
+h2 {
+  font-family: 'Kulim Park';
+  font-size: var(--font-1);
+  /* font-weight: 500; */
+  letter-spacing: 0.1em;
+}
+
+h3 {
+  font-family: 'Kulim Park';
+  font-size: var(--font-3);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+p {
+  font-family: 'Kulim Park';
+  font-size: var(--font-0);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}

@@ -1,0 +1,25 @@
+---
+import Navbar from '../components/Navbar/Navbar.astro';
+import '../styles/reset.css';
+import '../styles/fonts.css';
+import FollowBeanCursor from "../components/FollowBeanCursor/FollowBeanCursor.astro"
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8" />
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      <meta name="viewport" content="width=device-width" />
+      <meta name="generator" content={Astro.generator} />
+      <title>Earthy Origin</title>
+  </head>
+  <body>
+      <FollowBeanCursor />
+      <Navbar />
+      <main>
+          <slot /> {/* HIER wird der INHALT deiner index.astro (z.B. Hero-Sektion) eingefügt */}
+      </main>
+
+      {/* Optional: Footer hier */}
+  </body>
+</html>

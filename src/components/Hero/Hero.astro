@@ -1,0 +1,101 @@
+---
+import { Image } from "astro:assets";
+import heroMountains from '../../assets/images/hero-mountains.jpg'
+import Arrow from '../../assets/svgs/scrollArrow.svg'
+
+
+const heroImageUrl = heroMountains.src
+---
+
+<section id="hero" style={`background-image: url(${heroImageUrl})`}>
+  <div class="full-width-background-container">
+    <article class="heroHeadline">
+      <h1>Earthy Origin</h1>
+      <h2>Experience handcrafted coffee, cultivated with passion and deep respect for the earth.</h2>
+    </article>
+  </div>
+  <button>
+    <a href="#commitment">
+      <Arrow class="arrow" width={64} height={64} />
+    </a>
+  </button>
+</section>
+
+<style>
+  #hero{
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    height: 100vh;
+    height: 100dvh;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    scroll-snap-align: start;
+  }
+
+  .full-width-background-container {
+    width: 100%;
+    background-color: var(--clr-dark-brown-trans);
+    margin-bottom: 14dvh;
+  }
+
+  .heroHeadline {
+    max-width: 50%;
+    display: grid;
+    align-content: center;
+    color: white;
+    padding: var(--gap-xl);
+  }
+
+  h2 {
+    margin-top: var(--gap-l);
+  }
+
+  .arrow {
+    position: absolute;
+    inset: 0;
+    margin: auto auto 3dvh;
+  }
+</style>
+
+<script>
+
+  import { gsap } from "gsap";
+
+  const arrow = document.querySelector('.arrow')
+
+  gsap.set(arrow, {borderRadius: '50%'})
+
+  const tl = gsap.timeline()
+
+  tl.to(arrow, {
+    y: -10,
+    yoyo: true,
+    repeat: -1,
+    duration: 0.5
+  })
+
+  const hoverTl = gsap.timeline({paused: true})
+
+  hoverTl.to(arrow, {
+      scale: 1.25,
+      backgroundColor: 'var(--clr-dark-brown)',
+    })
+
+
+
+    if (window.matchMedia("(min-width: 769px)").matches) {
+    arrow?.addEventListener('mouseover', (event) => {
+      tl.pause(),
+      hoverTl.play()
+    })
+
+    arrow?.addEventListener('mouseleave', (event) => {
+      hoverTl.reverse(),
+      tl.play()
+    })
+
+  }
+
+</script>
