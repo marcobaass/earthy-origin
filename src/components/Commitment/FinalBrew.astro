@@ -7,7 +7,7 @@ const tabletImage = await getImage({ src: bgLight, width: 1200, format: 'webp', 
 const desktopImage = await getImage({ src: bgLight, width: 1920, format: 'webp', quality: 80 });
 const largeImage = await getImage({ src: bgLight, width: 2560, format: 'webp', quality: 80 });
 ---
-<div class="wrapper-commitment">
+<div class="wrapper-brew">
   <h1>Hello</h1>
 </div>
 
@@ -18,7 +18,7 @@ const largeImage = await getImage({ src: bgLight, width: 2560, format: 'webp', q
   largeUrl: `url(${largeImage.src})`
 }}>
 
-.wrapper-commitment {
+.wrapper-brew {
   background-color: black;
   background-image: var(--mobileUrl);
   background-size: cover;
@@ -26,26 +26,32 @@ const largeImage = await getImage({ src: bgLight, width: 2560, format: 'webp', q
   background-repeat: no-repeat;
   height: 100vh;
   height: 100dvh;
-  scroll-snap-align: start;
 }
 
 
 
 @media (min-width: 721px) {
-  .wrapper-commitment {
+  .wrapper-brew {
     background-image: var(--tabletUrl);
   }
 }
 
 @media (min-width: 1201px) {
-  .wrapper-commitment {
+  .wrapper-brew {
     background-image: var(--desktopUrl);
   }
 }
 
 @media (min-width: 1921px) {
-  .wrapper-commitment {
+  .wrapper-brew {
     background-image: var(--largeUrl);
   }
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .wrapper-brew {
+    scroll-snap-align: start;
+  }
+}
+
 </style>

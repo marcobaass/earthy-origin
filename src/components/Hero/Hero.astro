@@ -31,7 +31,6 @@ const heroImageUrl = heroMountains.src
     width: 100%;
     background-size: cover;
     background-position: center;
-    scroll-snap-align: start;
   }
 
   .full-width-background-container {
@@ -56,6 +55,12 @@ const heroImageUrl = heroMountains.src
     position: absolute;
     inset: 0;
     margin: auto auto 3dvh;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    #hero {
+      scroll-snap-align: start;
+    }
   }
 </style>
 

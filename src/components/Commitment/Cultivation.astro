@@ -1,15 +1,32 @@
 ---
 import bgLight from './../../assets/images/kraft-paper-02.webp'
-import { getImage } from 'astro:assets'
+import { getImage, Image } from 'astro:assets'
 
 const mobileImage = await getImage({ src: bgLight, width: 720, format: 'webp', quality: 80 });
 const tabletImage = await getImage({ src: bgLight, width: 1200, format: 'webp', quality: 80 });
 const desktopImage = await getImage({ src: bgLight, width: 1920, format: 'webp', quality: 80 });
 const largeImage = await getImage({ src: bgLight, width: 2560, format: 'webp', quality: 80 });
+
+import farmer from '../../assets/images/coffee-farmer-01.jpg';
 ---
-<div class="wrapper-commitment">
-  <h1>Hello</h1>
-</div>
+<section class="wrapper-cultivation">
+  <div class="content-cultivation">
+    <div class="cultivation-text">
+      <h3 class="split1">Cultivation</h3>
+      <h4>Rooted in Rich Soil</h4>
+      <p>Our journey starts in the fertile, high-altitude farms where coffee cherries ripen under the perfect climate. We work hand-in-hand with farmers who share our vision for quality and sustainable agriculture.</p>
+    </div>
+    <Image
+      class="farmer-img"
+      src={farmer}
+      alt="A farmer checks harvested coffee beans"
+      width={1600}
+      height={2400}
+      layout='constrained'
+    />
+
+  </div>
+</section>
 
 <style define:vars={{
   mobileUrl: `url(${mobileImage.src})`,
@@ -18,9 +35,8 @@ const largeImage = await getImage({ src: bgLight, width: 2560, format: 'webp', q
   largeUrl: `url(${largeImage.src})`
 }}>
 
-.wrapper-commitment {
-  display: grid;
-  grid-template-columns: 1fr 1000px 1fr;
+.wrapper-cultivation {
+  color: black;
   background-color: black;
   background-image: var(--mobileUrl);
   background-size: cover;
@@ -28,26 +44,155 @@ const largeImage = await getImage({ src: bgLight, width: 2560, format: 'webp', q
   background-repeat: no-repeat;
   height: 100vh;
   height: 100dvh;
-  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-cultivation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-m);
+  width: 100%;
+  height: 100%;
+  margin-inline: var(--gap-m)
+}
+
+.cultivation-text{
+  max-width: 65ch;
+  opacity: 0
+}
+
+.farmer-img {
+  max-height: 70vh;
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  object-fit: cover;
+  border-radius: 16px;
 }
 
 
 
+@media (max-width: 600px) {
+  .farmer-img {
+    aspect-ratio: 1 / 1;
+  }
+
+  .content-cultivation {
+    flex-wrap: wrap;
+    gap: 1em;
+    align-content: center;
+    margin-top: 80px;
+  }
+
+}
+
 @media (min-width: 721px) {
-  .wrapper-commitment {
+  .wrapper-cultivation {
     background-image: var(--tabletUrl);
   }
 }
 
 @media (min-width: 1201px) {
-  .wrapper-commitment {
+  .wrapper-cultivation {
     background-image: var(--desktopUrl);
   }
 }
 
 @media (min-width: 1921px) {
-  .wrapper-commitment {
+  .wrapper-cultivation {
     background-image: var(--largeUrl);
   }
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .wrapper-cultivation {
+    scroll-snap-align: start;
+  }
+}
+
 </style>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { SplitText } from "gsap/SplitText";
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  const farmerImg = document.querySelector('.farmer-img');
+  const cultivationTexth3 = document.querySelector('.cultivation-text h3');
+  const cultivationTexth4 = document.querySelector('.cultivation-text h4');
+  const cultivationTextp = document.querySelector('.cultivation-text p');
+
+  // Image animation (simpler on mobile)
+  const imgTl = gsap.timeline()
+    .from(farmerImg, {
+      opacity: 0,
+      x: isMobile ? 50 : '100%', // Less distance on mobile
+      duration: isMobile ? 0.5 : 0.75,
+      ease: 'power1.inOut'
+    });
+
+  ScrollTrigger.create({
+    trigger: farmerImg,
+    start: 'top 80%',
+    animation: imgTl,
+    once: true,
+  });
+
+  // Text animation - COMPLETELY DIFFERENT on mobile
+  if (isMobile) {
+    // Simple fade-in for mobile - NO SplitText
+    gsap.set(".cultivation-text", {opacity: 1});
+    gsap.from([cultivationTexth3, cultivationTexth4, cultivationTextp], {
+      scrollTrigger: {
+        trigger: ".cultivation-text",
+        start: 'top 70%',
+        once: true,
+      },
+      opacity: 0,
+      y: 30,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'power2.out'
+    });
+  } else {
+    // Full SplitText animation for desktop only
+    const fontTimeout = setTimeout(() => {
+      initTextAnimation();
+    }, 1500); // Fallback after 1.5 seconds
+
+    document.fonts.ready.then(() => {
+      clearTimeout(fontTimeout);
+      initTextAnimation();
+    });
+  }
+
+  function initTextAnimation() {
+    ScrollTrigger.create({
+      trigger: ".cultivation-text",
+      start: 'top 60%',
+      once: true,
+      onEnter: () => {
+        gsap.set(".cultivation-text", {opacity: 1});
+        SplitText.create([cultivationTexth3, cultivationTexth4, cultivationTextp], {
+          type: "words, lines",
+          mask: "lines",
+          autoSplit: true,
+          onSplit(self) {
+            return gsap.from(self.lines, {
+              duration: 1,
+              y: 200,
+              autoAlpha: 0,
+              stagger: 0.1,
+              ease: "expo.out",
+            });
+          }
+        });
+      }
+    });
+  }
+</script>

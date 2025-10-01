@@ -136,6 +136,13 @@ h3 {
   letter-spacing: 0.1em;
 }
 
+h4 {
+  font-family: 'Kulim Park';
+  font-size: var(--font-1);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
 p {
   font-family: 'Kulim Park';
   font-size: var(--font-0);

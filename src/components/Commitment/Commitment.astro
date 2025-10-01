@@ -40,7 +40,6 @@ const largeImage = await getImage({ src: bgLight, width: 2560, format: 'webp', q
   background-repeat: no-repeat;
   height: 100vh;
   height: 100dvh;
-  scroll-snap-align: start;
   padding: var(--gap-m);
 }
 
@@ -92,6 +91,13 @@ const largeImage = await getImage({ src: bgLight, width: 2560, format: 'webp', q
     background-image: var(--largeUrl);
   }
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .wrapper-commitment {
+    scroll-snap-align: start;
+  }
+}
+
 </style>
 
 <script>
